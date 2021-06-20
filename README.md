@@ -6,3 +6,4 @@
 - &#9745; Making global styles
 - &#9745; Light / Dark theme
 - &#9745; jsconfig
+- &#9745; Spinner
