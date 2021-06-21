@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import LightTheme from "themes/light";
+import DarkTheme from "themes/dark";
 
 const ToggleWrapper = styled.div`
   width: 50px;
@@ -26,7 +28,12 @@ const Notch = styled.div`
 `;
 
 const Toggle = ({ isActive, onToggle }) => {
-  console.log(isActive, onToggle);
+  // console.log(isActive, onToggle);
+  if (isActive) {
+    localStorage.setItem("Mytheme", JSON.stringify(DarkTheme));
+  } else {
+    localStorage.setItem("Mytheme", JSON.stringify(LightTheme));
+  }
   return (
     <ToggleWrapper onClick={onToggle}>
       <Notch isActive={isActive} />

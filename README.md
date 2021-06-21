@@ -7,3 +7,4 @@
 - &#9745; Light / Dark theme
 - &#9745; jsconfig
 - &#9745; Spinner
+- &#9745; Theme persistence using local storage

@@ -1,8 +1,10 @@
-import { useState } from "react";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { useState, useEffect } from "react";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import Routes from "./Routes";
+import { Spinner } from "components/common";
 import LightTheme from "themes/light";
 import DarkTheme from "themes/dark";
+import axios from "axios";
 const GlobalStyle = createGlobalStyle`
 *, *::after, *::before {
     box-sizing: border-box;
@@ -17,9 +19,34 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-function App() {
-  const [theme, setTheme] = useState(LightTheme);
-  return (
+const Container = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const App = () => {
+  const [theme, setTheme] = useState(
+    () => JSON.parse(localStorage.getItem("Mytheme")) || LightTheme
+  );
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    getData();
+  }, []);
+  const getData = async () => {
+    const res = await axios.get("https://www.breakingbadapi.com/api/episodes");
+    setData(res.data);
+  };
+  console.log(data);
+
+  // if (!data) return <Spinner />;
+
+  return !data ? (
+    <Container>
+      <Spinner />
+    </Container>
+  ) : (
     <ThemeProvider
       theme={{
         ...theme,
@@ -32,6 +59,6 @@ function App() {
       <Routes />
     </ThemeProvider>
   );
-}
+};
 
 export default App;
