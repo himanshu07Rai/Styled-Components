@@ -8,3 +8,4 @@
 - &#9745; jsconfig
 - &#9745; Spinner
 - &#9745; Theme persistence using local storage
+- &#9745; HashRouter
